@@ -1,0 +1,28 @@
+CREATE TABLE `show` (
+   `show_id` int(11) NOT NULL AUTO_INCREMENT,
+   `title` varchar(100) NOT NULL,
+   `distribution` varchar(500) NOT NULL,
+   `genre` enum('opera','ballet') NOT NULL,
+   `date` datetime NOT NULL,
+   `number_of_tickets` int(11) NOT NULL,
+   PRIMARY KEY (`show_id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8
+
+ CREATE TABLE `ticket` (
+   `ticket_id` int(11) NOT NULL AUTO_INCREMENT,
+   `show_id` int(11) NOT NULL,
+   `seat_row` int(11) NOT NULL,
+   `seat_number` int(11) NOT NULL,
+   `price` float NOT NULL,
+   PRIMARY KEY (`ticket_id`),
+   KEY `show_id_idx` (`show_id`),
+   CONSTRAINT `show_id` FOREIGN KEY (`show_id`) REFERENCES `show` (`show_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+ CREATE TABLE `user` (
+   `user_id` int(11) NOT NULL AUTO_INCREMENT,
+   `username` varchar(50) NOT NULL,
+   `password` char(32) NOT NULL,
+   `is_admin` tinyint(1) NOT NULL,
+   PRIMARY KEY (`user_id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8
